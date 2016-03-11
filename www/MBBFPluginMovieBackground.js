@@ -1,22 +1,19 @@
 /*global cordova, module*/
 
 module.exports = {
-    greet: function (name, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "Hello", "greet", [name]);
-    },
 	addMovieBackgroundWithPath: function (moviePath, successCallback, errorCallback) {
 		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "addMovieBackgroundWithPath", [moviePath]);
 	},
-	playMovie: function ("", successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "playMovie", "");
+	playMovie: function (args, successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "playMovie", [args]);
 	},
-	pauseMovie: function ("", successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "pauseMovie", "");
+	pauseMovie: function (args, successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "pauseMovie", [args]);
 	},
-	stopMovie: function ("", successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "stopMovie", "");
+	stopMovie: function (args, successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "stopMovie", [args]);
 	},
-	removeMovieBackground: function ("", successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "removeMovieBackground", "");
+	removeMovieBackground: function (args, successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "removeMovieBackground", [args]);
 	}
 };
