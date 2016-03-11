@@ -14,6 +14,8 @@
 {
 	self.moviePath = command.arguments[0];
 	[self.moviePlayerController prepareToPlay];
+	self.webView.backgroundColor = [UIColor clearColor];
+	self.webView.opaque = NO;
 	[self.webView insertSubview:self.moviePlayerController.view atIndex:0];
 	self.moviePlayerController.view.frame = self.webView.frame;
 	
