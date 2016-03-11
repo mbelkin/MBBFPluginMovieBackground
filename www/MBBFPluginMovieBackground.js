@@ -7,16 +7,16 @@ module.exports = {
 	addMovieBackgroundWithPath: function (moviePath, successCallback, errorCallback) {
 		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "addMovieBackgroundWithPath", [moviePath]);
 	},
-	playMovie: function (null, successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "playMovie", nill);
+	playMovie: function ("", successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "playMovie", "");
 	},
-	pauseMovie: function (null, successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "pauseMovie", nill);
+	pauseMovie: function ("", successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "pauseMovie", "");
 	},
-	stopMovie: function (null, successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "stopMovie", nill);
+	stopMovie: function ("", successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "stopMovie", "");
 	},
-	removeMovieBackground: function (null, successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "removeMovieBackground", nill);
+	removeMovieBackground: function ("", successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, "MBBFPluginMovieBackground", "removeMovieBackground", "");
 	}
 };
