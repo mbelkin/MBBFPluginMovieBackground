@@ -10,40 +10,43 @@
 
 @implementation MBBFPluginMovieBackground
 
-- (void)greet:(CDVInvokedUrlCommand*)command
-{
-	
-	NSString* callbackId = [command callbackId];
-	NSString* name = [[command arguments] objectAtIndex:0];
-	NSString* msg = [NSString stringWithFormat: @"Michael Says Hello, %@", name];
-	
-	CDVPluginResult* result = [CDVPluginResult
-							   resultWithStatus:CDVCommandStatus_OK
-							   messageAsString:msg];
-	
-	[self.commandDelegate sendPluginResult:result callbackId:callbackId];
-}
-
-- (void)playMoviePath:(CDVInvokedUrlCommand *)command
+- (void)addMovieBackgroundWithPath:(CDVInvokedUrlCommand *)command
 {
 	self.moviePath = command.arguments[0];
 	[self.moviePlayerController prepareToPlay];
 	[self.webView insertSubview:self.moviePlayerController.view atIndex:0];
 	self.moviePlayerController.view.frame = self.webView.frame;
+	
+	[self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:[command callbackId]];
+}
+
+- (void)playMovie:(CDVInvokedUrlCommand *)command
+{
 	[self.moviePlayerController play];
 	
-	CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-	[self.commandDelegate sendPluginResult:result callbackId:[command callbackId]];
+	[self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:[command callbackId]];
 }
 
-- (void)pauseCurrentMovie:(CDVInvokedUrlCommand *)command
+- (void)pauseMovie:(CDVInvokedUrlCommand *)command
 {
+	[self.moviePlayerController pause];
 	
+	[self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:[command callbackId]];
 }
 
-- (void)stopCurrentMovie:(CDVInvokedUrlCommand *)command
+- (void)stopMovie:(CDVInvokedUrlCommand *)command
 {
+	[self.moviePlayerController stop];
 	
+	[self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:[command callbackId]];
+}
+
+- (void)removeMovieBackground:(CDVInvokedUrlCommand *)command
+{
+	[self.moviePlayerController.view removeFromSuperview];
+	self.moviePlayerController = nil;
+	
+	[self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:[command callbackId]];
 }
 
 #pragma mark - Getters
@@ -51,8 +54,7 @@
 {
 	if (!_moviePlayerController)
 	{
-		NSURL * contentUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"booster" ofType:@"mp4"]];
-		//_moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:self.contentUrlString]];
+		NSURL * contentUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"www/video/%@", self.moviePath] ofType:@"mp4"]];
 		_moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:contentUrl];
 		_moviePlayerController.controlStyle = MPMovieControlStyleNone;
 		_moviePlayerController.repeatMode = MPMovieRepeatModeOne;
@@ -66,7 +68,7 @@
 - (void)setMoviePath:(NSString *)moviePath
 {
 	_moviePath = moviePath;
-	self.moviePlayerController.contentURL = [NSURL URLWithString:moviePath];
+	self.moviePlayerController.contentURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"www/video/%@", moviePath] ofType:@"mp4"]];
 }
 
 @end

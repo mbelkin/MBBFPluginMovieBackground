@@ -2,9 +2,10 @@
 
 @interface MBBFPluginMovieBackground : CDVPlugin
 
-- (void)greet:(CDVInvokedUrlCommand*)command;
-- (void)playMoviePath:(CDVInvokedUrlCommand *)command;
-- (void)pauseCurrentMovie:(CDVInvokedUrlCommand *)command;
-- (void)stopCurrentMovie:(CDVInvokedUrlCommand *)command;
+- (void)addMovieBackgroundWithPath:(CDVInvokedUrlCommand *)command;
+- (void)playMovie:(CDVInvokedUrlCommand *)command;
+- (void)pauseMovie:(CDVInvokedUrlCommand *)command;
+- (void)stopMovie:(CDVInvokedUrlCommand *)command;
+- (void)removeMovieBackground:(CDVInvokedUrlCommand *)command;
 
 @end
